@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battleship</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Battleship</h1>
+
+    <div id="main-menu">
+        <h2>Main Menu</h2>
+        <button id="btn-single-player">Single Player (vs Bot)</button>
+        <button id="btn-multiplayer">Multiplayer Online</button>
+    </div>
+
+    <div id="ship-placement" style="display: none;">
+        <h2>Place Your Ships</h2>
+        <div id="placement-info">
+            <p>Select a ship, choose orientation, and click on the grid to place.</p>
+            <p>Time remaining: <span id="timer">5:00</span></p>
+        </div>
+        <div id="ship-selection">
+            <label>Orientation:</label>
+            <select id="orientation">
+                <option value="H">Horizontal</option>
+                <option value="V">Vertical</option>
+            </select>
+            <div id="ship-list">
+                <!-- Ships will be added dynamically by JS -->
+            </div>
+        </div>
+        <div class="board-container placement-board-container">
+             <div>
+                <h2>Your Board</h2>
+                <div id="placement-board" class="board"></div>
+             </div>
+        </div>
+        <button id="btn-ready" disabled>Ready</button>
+        <button id="btn-auto-place">Auto Place</button>
+        <button id="btn-reset-ships">Reset</button>
+    </div>
+
+    <div id="game-area" style="display: none;">
+        <div id="game-info">Connecting...</div>
+        <div class="boards-container">
+            <div>
+                <h2>Your Board</h2>
+                <div id="player-board" class="board"></div>
+            </div>
+            <div>
+                <h2>Opponent's Board</h2>
+                <div id="opponent-board" class="board"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="client.js"></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+body {
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+}
+
+#main-menu, #ship-placement, #game-area {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+#main-menu button {
+  padding: 10px 20px;
+  font-size: 1.1em;
+  margin: 10px;
+  cursor: pointer;
+}
+
+#ship-selection {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#ship-list button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+#ship-list button.selected {
+    background-color: #a0a0ff;
+    border-color: #0000ff;
+}
+#ship-list button:disabled {
+    text-decoration: line-through;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+
+#placement-info {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#timer {
+    font-weight: bold;
+    color: #d9534f;
+}
+
+.boards-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.placement-board-container {
+    justify-content: center; /* Center the single board */
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(10, 30px);
+  grid-template-rows: repeat(10, 30px);
+  border: 1px solid #333;
+  width: 301px; /* 10 * 30px + 1px border */
+  height: 301px; /* 10 * 30px + 1px border */
+  background-color: #fff; /* White background for boards */
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #eee; /* Lighter grid lines */
+  box-sizing: border-box;
+  background-color: #f0f8ff; /* Alice blue for water */
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px; /* Slightly larger symbols */
+  position: relative; /* For hover effects */
+}
+
+/* Placement board specific styles */
+#placement-board .cell:hover {
+  background-color: #add8e6; /* Light blue on hover */
+}
+#placement-board .cell.ship {
+  background-color: #708090; /* Slate gray for placed ships */
+  cursor: default;
+}
+#placement-board .cell.placement-hover-valid {
+    background-color: #90ee90; /* Light green for valid placement */
+}
+#placement-board .cell.placement-hover-invalid {
+    background-color: #f08080; /* Light coral for invalid placement */
+}
+
+
+/* Game board specific styles */
+#player-board .cell {
+    cursor: default; /* No clicking on own board during game */
+}
+#player-board .cell.ship {
+  background-color: #a9a9a9; /* Darker gray for own ships */
+}
+
+#opponent-board .cell {
+  background-color: #e0f7fa; /* Lighter cyan for opponent grid */
+}
+#opponent-board .cell:hover {
+  background-color: #b2ebf2; /* Cyan on hover */
+}
+#opponent-board .cell.hit,
+#opponent-board .cell.miss {
+    cursor: default; /* No re-clicking hits/misses */
+}
+
+
+.hit {
+  background-color: #ff4d4d !important; /* Brighter red for hit */
+  color: white;
+}
+
+.miss {
+  background-color: #b0bec5 !important; /* Blue-gray for miss */
+  color: #37474f;
+}
+
+/* Hide elements by default */
+.hidden {
+    display: none !important;
+}
+
+/* Buttons */
+button {
+    padding: 8px 15px;
+    margin: 5px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+}
+button:hover {
+    background-color: #e0e0e0;
+}
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+#btn-ready {
+    background-color: #5cb85c;
+    color: white;
+    border-color: #4cae4c;
+}
+#btn-ready:hover {
+    background-color: #4cae4c;
+}
+#btn-ready:disabled {
+    background-color: #a3d3a3;
+    border-color: #9bc89b;
+    color: #eee;
+}
