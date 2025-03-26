@@ -218,11 +218,19 @@ wss.on('connection', (ws) => {
                     // Check for win condition using imported function
                     const winner = (result === 'hit' && checkWinCondition(targetBoard)) ? currentPlayerId : null;
 
+                    // Determine next turn: Opponent's turn if miss, same player's turn if hit, null if game over
+                    const nextTurn = winner ? null : (result === 'miss' ? targetPlayerId : currentPlayerId);
+
+                    // Update game turn (only if no winner)
+                    if (!winner) {
+                        game.turn = nextTurn;
+                    }
+
                     // Prepare update payload
                     const updatePayload = {
                         shooter: currentPlayerId,
                         row, col, result,
-                        turn: winner ? null : targetPlayerId, // Next turn is opponent, unless game over
+                        turn: nextTurn, // Send the correct turn
                     };
 
                     // Broadcast update to both players
@@ -231,7 +239,7 @@ wss.on('connection', (ws) => {
                             safeSend(players[id].ws, { type: 'game_update', payload: updatePayload });
                         }
                     });
-                     console.log(`Game ${game.id}: Player ${currentPlayerId} fired at (${row}, ${col}). Result: ${result}.`);
+                     console.log(`Game ${game.id}: Player ${currentPlayerId} fired at (${row}, ${col}). Result: ${result}. Next turn: ${nextTurn}`);
 
                     if (winner) {
                         game.gameOver = true;
@@ -247,10 +255,6 @@ wss.on('connection', (ws) => {
                         });
                         // Clean up game? Or keep for history?
                         // Consider deleting games[gameId] after a delay or based on policy
-                    } else {
-                        // Switch turn
-                        game.turn = targetPlayerId;
-                         console.log(`Next turn: ${game.turn}`);
                     }
                     break;
 
@@ -329,7 +333,7 @@ function handleDisconnect(playerId, code, reason) {
             // Update opponent's state back to connected, ready for new match?
             // opponent.status = 'CONNECTED';
             // opponent.gameId = null;
-             console.log(`Notified opponent ${opponentId} about player ${playerId} disconnecting.`);
+             console.log(`Notified opponent ${opponentId} about player ${playerIddisconnecting.`);
         } else if (opponent) {
              console.log(`Opponent ${opponentId} was not connected or readyState was ${opponent.ws.readyState}. Cannot notify.`);
         } else {

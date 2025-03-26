@@ -539,12 +539,20 @@ function processPlayerShot(row, col) {
     if (result === 'hit' && checkWinCondition(opponentBoardState)) {
         endGame(true); // Player wins
     } else {
-        // Player's turn ends, switch to bot
-        playerTurn = false; // Already set optimistically, confirm here
-        gameInfoElement.textContent = "Bot's turn...";
-        updateUI(); // Re-render boards (opponent board non-clickable)
-        // Trigger bot's turn after a short delay
-        setTimeout(botTurn, 1000 + Math.random() * 1000); // Add slight random delay
+        // Check if player gets another turn
+        if (result === 'hit') {
+            // Player gets another turn
+            playerTurn = true;
+            gameInfoElement.textContent = "Hit! Your turn again.";
+            updateUI(); // Re-enable click handlers on opponent board
+        } else {
+            // Player missed, switch to bot
+            playerTurn = false;
+            gameInfoElement.textContent = "Miss. Bot's turn...";
+            updateUI(); // Re-render boards (opponent board non-clickable)
+            // Trigger bot's turn after a short delay
+            setTimeout(botTurn, 1000 + Math.random() * 1000); // Add slight random delay
+        }
     }
 }
 
@@ -701,7 +709,7 @@ function connectWebSocket() {
                  // Keep placement UI visible? Or show a waiting message?
                  // For now, assume placement UI stays until match found and 'start_placement' received.
              }
-             break;
+            break;
         case 'wait_for_opponent': // Opponent is still placing ships
             if (gameState === 'WAITING_MP') { // Only relevant if we are already waiting after submitting board
                 gameInfoElement.textContent = message.payload.message || 'Waiting for opponent to place ships...';
