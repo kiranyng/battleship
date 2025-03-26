@@ -333,7 +333,7 @@ function handleDisconnect(playerId, code, reason) {
             // Update opponent's state back to connected, ready for new match?
             // opponent.status = 'CONNECTED';
             // opponent.gameId = null;
-             console.log(`Notified opponent ${opponentId} about player ${playerIddisconnecting.`);
+             console.log(`Notified opponent ${opponentId} about player ${playerId} disconnecting.`);
         } else if (opponent) {
              console.log(`Opponent ${opponentId} was not connected or readyState was ${opponent.ws.readyState}. Cannot notify.`);
         } else {

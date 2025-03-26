@@ -51,7 +51,7 @@ export function createInitialBoard(shipTypesToUse = SHIP_TYPES) { // Use exporte
             console.error(`Bot failed to place ship of length ${shipType.length}`);
         }
     });
-    console.log(`Generated bot board with ${currentShips} ships.`);
+    // console.log(`Generated bot board with ${currentShips} ships.`); // Less console noise
     return board;
 }
 
@@ -94,6 +94,6 @@ export function validateBoard(board, shipTypesToValidate = SHIP_TYPES) { // Use 
         return false;
     }
 
-    console.log("Board validation successful.");
+    // console.log("Board validation successful."); // Less console noise
     return true;
 }

@@ -3,58 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Battleship</title>
+    <title>Battleship Commander</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Battleship</h1>
+    <div id="app-container">
+        <h1>Battleship Commander</h1>
 
-    <div id="main-menu">
-        <h2>Main Menu</h2>
-        <button id="btn-single-player">Single Player (vs Bot)</button>
-        <button id="btn-multiplayer">Multiplayer Online</button>
-    </div>
-
-    <div id="ship-placement" style="display: none;">
-        <h2>Place Your Ships</h2>
-        <div id="placement-info">
-            <p>Select a ship, choose orientation, and click on the grid to place.</p>
-            <p>Time remaining: <span id="timer">5:00</span></p>
+        <div id="main-menu" class="menu-panel">
+            <h2>Main Menu</h2>
+            <button id="btn-single-player" class="btn btn-primary">Single Player (vs Bot)</button>
+            <button id="btn-multiplayer" class="btn btn-primary">Multiplayer Online</button>
         </div>
-        <div id="ship-selection">
-            <label>Orientation:</label>
-            <select id="orientation">
-                <option value="H">Horizontal</option>
-                <option value="V">Vertical</option>
-            </select>
-            <div id="ship-list">
-                <!-- Ships will be added dynamically by JS -->
+
+        <div id="ship-placement" class="menu-panel" style="display: none;">
+            <h2>Deploy Your Fleet</h2>
+            <div id="placement-info">
+                <p>Select ship, orientation (H/V), click grid to place.</p>
+                <p>Time remaining: <span id="timer">5:00</span></p>
+            </div>
+            <div id="ship-selection">
+                <label>Orientation:</label>
+                <select id="orientation">
+                    <option value="H">Horizontal</option>
+                    <option value="V">Vertical</option>
+                </select>
+                <div id="ship-list">
+                    <!-- Ships will be added dynamically by JS -->
+                </div>
+            </div>
+            <div class="board-container placement-board-container">
+                 <div>
+                    <h2 class="board-title">Your Deployment Zone</h2>
+                    <div id="placement-board" class="board"></div>
+                 </div>
+            </div>
+            <div class="placement-controls">
+                <button id="btn-ready" class="btn btn-success" disabled>Engage!</button>
+                <button id="btn-auto-place" class="btn btn-secondary">Auto Place</button>
+                <button id="btn-reset-ships" class="btn btn-warning">Reset</button>
             </div>
         </div>
-        <div class="board-container placement-board-container">
-             <div>
-                <h2>Your Board</h2>
-                <div id="placement-board" class="board"></div>
-             </div>
+
+        <div id="game-area" style="display: none;">
+            <div id="game-info" class="info-panel">Connecting...</div>
+            <div class="boards-container">
+                <div>
+                    <h2 class="board-title">Your Fleet</h2>
+                    <div id="player-board" class="board"></div>
+                </div>
+                <div>
+                    <h2 class="board-title">Enemy Waters</h2>
+                    <div id="opponent-board" class="board"></div>
+                </div>
+            </div>
         </div>
-        <button id="btn-ready" disabled>Ready</button>
-        <button id="btn-auto-place">Auto Place</button>
-        <button id="btn-reset-ships">Reset</button>
     </div>
 
-    <div id="game-area" style="display: none;">
-        <div id="game-info">Connecting...</div>
-        <div class="boards-container">
-            <div>
-                <h2>Your Board</h2>
-                <div id="player-board" class="board"></div>
-            </div>
-            <div>
-                <h2>Opponent's Board</h2>
-                <div id="opponent-board" class="board"></div>
-            </div>
-        </div>
-    </div>
+    <!-- Sound Effects -->
+    <!-- NOTE: You need to provide these sound files in the 'assets/sounds/' directory -->
+    <audio id="sound-fire" src="assets/sounds/fire.mp3" preload="auto"></audio>
+    <audio id="sound-hit" src="assets/sounds/hit.mp3" preload="auto"></audio>
+    <audio id="sound-miss" src="assets/sounds/miss.mp3" preload="auto"></audio>
+    <audio id="sound-win" src="assets/sounds/win.mp3" preload="auto"></audio>
+    <audio id="sound-lose" src="assets/sounds/lose.mp3" preload="auto"></audio>
+    <audio id="sound-place" src="assets/sounds/place.mp3" preload="auto"></audio>
+    <audio id="sound-click" src="assets/sounds/click.mp3" preload="auto"></audio>
 
     <script type="module" src="client.js"></script>
 </body>

@@ -1,71 +1,178 @@
+/* General Styles */
 body {
-  font-family: sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #1a2a3a; /* Dark blue background */
+  /* Optional: Add a subtle background image */
+  /* background-image: url('assets/images/background.jpg'); */
+  background-size: cover;
+  background-position: center;
+  color: #e0e0e0; /* Light text color */
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1em;
+  justify-content: center;
+  align-items: flex-start; /* Align panels to top */
+  min-height: 100vh;
+  padding-top: 20px;
 }
 
-#main-menu, #ship-placement, #game-area {
+#app-container {
+    width: 100%;
+    max-width: 900px; /* Adjust max width as needed */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(10, 20, 30, 0.8); /* Semi-transparent dark panel */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 150, 255, 0.5);
+}
+
+h1 {
+  color: #61dafb; /* Light blue title */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+h2 {
+    color: #f0f0f0;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.board-title {
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    color: #bbb;
+}
+
+/* Panels (Menu, Placement, Game Info) */
+.menu-panel, .info-panel {
   width: 100%;
-  max-width: 800px;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
-  padding: 15px;
-  border: 1px solid #ccc;
+  padding: 20px;
+  border: 1px solid #0077cc;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: rgba(30, 50, 70, 0.9); /* Slightly lighter panel background */
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
-#main-menu button {
-  padding: 10px 20px;
-  font-size: 1.1em;
-  margin: 10px;
-  cursor: pointer;
+.info-panel {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ffcc00; /* Yellow info text */
+    text-align: center;
 }
 
+/* Buttons */
+.btn {
+    padding: 10px 20px;
+    font-size: 1em;
+    margin: 8px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+.btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    background-color: #555 !important;
+}
+
+.btn-primary { background-color: #007bff; }
+.btn-primary:hover { background-color: #0056b3; }
+.btn-success { background-color: #28a745; }
+.btn-success:hover { background-color: #1e7e34; }
+.btn-warning { background-color: #ffc107; color: #333; }
+.btn-warning:hover { background-color: #d39e00; }
+.btn-secondary { background-color: #6c757d; }
+.btn-secondary:hover { background-color: #545b62; }
+
+
+/* Ship Placement Specific */
 #ship-selection {
     margin-bottom: 15px;
     display: flex;
+    flex-wrap: wrap; /* Allow wrapping */
+    justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 10px 15px;
+}
+#ship-selection label {
+    margin-right: 5px;
+}
+#ship-selection select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
 }
 
 #ship-list button {
     margin: 0 5px;
-    padding: 5px 10px;
+    padding: 6px 12px;
     cursor: pointer;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    background-color: #445;
+    color: #eee;
+    transition: background-color 0.2s, border-color 0.2s;
 }
-
+#ship-list button:hover:not(:disabled) {
+    background-color: #556;
+    border-color: #ccc;
+}
 #ship-list button.selected {
-    background-color: #a0a0ff;
-    border-color: #0000ff;
+    background-color: #007bff;
+    border-color: #61dafb;
+    color: white;
 }
 #ship-list button:disabled {
     text-decoration: line-through;
     cursor: not-allowed;
     opacity: 0.6;
+    background-color: #333;
+    border-color: #555;
 }
-
 
 #placement-info {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    color: #ccc;
 }
-
 #timer {
     font-weight: bold;
-    color: #d9534f;
+    color: #ffc107; /* Yellow timer */
+}
+.placement-controls {
+    margin-top: 15px;
 }
 
+/* Boards */
 .boards-container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap; /* Allow wrapping on smaller screens */
-  gap: 40px;
+  gap: 30px 50px; /* Adjust gap */
   margin-top: 20px;
+  width: 100%;
 }
 
 .placement-board-container {
@@ -74,105 +181,114 @@ body {
 
 .board {
   display: grid;
-  grid-template-columns: repeat(10, 30px);
-  grid-template-rows: repeat(10, 30px);
-  border: 1px solid #333;
-  width: 301px; /* 10 * 30px + 1px border */
-  height: 301px; /* 10 * 30px + 1px border */
-  background-color: #fff; /* White background for boards */
+  grid-template-columns: repeat(10, 32px); /* Slightly larger cells */
+  grid-template-rows: repeat(10, 32px);
+  border: 2px solid #00aaff; /* Brighter blue border */
+  width: 322px; /* 10 * 32px + 2px border */
+  height: 322px;
+  background-color: #05101a; /* Darker water background */
+  /* Optional: Water texture */
+  /* background-image: url('assets/images/water.png'); */
+  background-size: cover;
+  box-shadow: 0 0 10px rgba(0, 150, 255, 0.3);
 }
 
 .cell {
-  width: 30px;
-  height: 30px;
-  border: 1px solid #eee; /* Lighter grid lines */
+  width: 32px;
+  height: 32px;
+  border: 1px solid #1c3a5a; /* Darker blue grid lines */
   box-sizing: border-box;
-  background-color: #f0f8ff; /* Alice blue for water */
+  background-color: transparent; /* Use board background */
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 14px; /* Slightly larger symbols */
-  position: relative; /* For hover effects */
+  font-size: 18px; /* Larger symbols */
+  position: relative;
+  transition: background-color 0.2s ease;
 }
 
 /* Placement board specific styles */
-#placement-board .cell:hover {
-  background-color: #add8e6; /* Light blue on hover */
+#placement-board .cell:hover:not(.ship):not(.placement-hover-invalid):not(.placement-hover-valid) {
+  background-color: rgba(0, 150, 255, 0.2); /* Light blue hover */
 }
 #placement-board .cell.ship {
-  background-color: #708090; /* Slate gray for placed ships */
+  background-color: #5a6a7a; /* Slate gray for placed ships */
+  border-color: #889;
   cursor: default;
 }
 #placement-board .cell.placement-hover-valid {
-    background-color: #90ee90; /* Light green for valid placement */
+    background-color: rgba(0, 255, 0, 0.4); /* Transparent green */
 }
 #placement-board .cell.placement-hover-invalid {
-    background-color: #f08080; /* Light coral for invalid placement */
+    background-color: rgba(255, 0, 0, 0.4); /* Transparent red */
 }
 
 
 /* Game board specific styles */
 #player-board .cell {
-    cursor: default; /* No clicking on own board during game */
+    cursor: default;
 }
 #player-board .cell.ship {
-  background-color: #a9a9a9; /* Darker gray for own ships */
+  background-color: #778899; /* Lighter slate gray for own ships */
 }
 
 #opponent-board .cell {
-  background-color: #e0f7fa; /* Lighter cyan for opponent grid */
+  /* Keep transparent background */
 }
-#opponent-board .cell:hover {
-  background-color: #b2ebf2; /* Cyan on hover */
+#opponent-board .cell:hover:not(.hit):not(.miss) {
+  background-color: rgba(0, 200, 255, 0.3); /* Cyan hover */
 }
 #opponent-board .cell.hit,
 #opponent-board .cell.miss {
-    cursor: default; /* No re-clicking hits/misses */
+    cursor: default;
 }
 
+
+/* Hit & Miss Styles & Animations */
+.miss {
+  background-color: rgba(100, 120, 140, 0.6) !important; /* Semi-transparent gray */
+  color: #fff;
+  text-shadow: 1px 1px 2px black;
+}
+.miss::before { /* Simple dot */
+    content: '●';
+    font-size: 14px;
+    color: #ddd;
+}
 
 .hit {
-  background-color: #ff4d4d !important; /* Brighter red for hit */
+  background-color: rgba(255, 60, 60, 0.7) !important; /* Semi-transparent red */
   color: white;
+  text-shadow: 1px 1px 2px black;
+}
+.hit::before { /* Explosion symbol */
+    content: '💥'; /* Or use 🔥 */
+    font-size: 18px;
 }
 
-.miss {
-  background-color: #b0bec5 !important; /* Blue-gray for miss */
-  color: #37474f;
+/* Animations */
+@keyframes hit-animation {
+  0% { transform: scale(1); background-color: rgba(255, 60, 60, 0.7); }
+  50% { transform: scale(1.3); background-color: rgba(255, 150, 0, 0.9); } /* Orange flash */
+  100% { transform: scale(1); background-color: rgba(255, 60, 60, 0.7); }
+}
+
+@keyframes miss-animation {
+  0% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(0.8); opacity: 1; background-color: rgba(150, 180, 200, 0.8); } /* Lighter splash */
+  100% { transform: scale(1); opacity: 1; background-color: rgba(100, 120, 140, 0.6); }
+}
+
+.cell.animate-hit {
+  animation: hit-animation 0.5s ease-out;
+}
+
+.cell.animate-miss {
+  animation: miss-animation 0.4s ease-out;
 }
 
 /* Hide elements by default */
 .hidden {
     display: none !important;
-}
-
-/* Buttons */
-button {
-    padding: 8px 15px;
-    margin: 5px;
-    cursor: pointer;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f0f0f0;
-}
-button:hover {
-    background-color: #e0e0e0;
-}
-button:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-}
-#btn-ready {
-    background-color: #5cb85c;
-    color: white;
-    border-color: #4cae4c;
-}
-#btn-ready:hover {
-    background-color: #4cae4c;
-}
-#btn-ready:disabled {
-    background-color: #a3d3a3;
-    border-color: #9bc89b;
-    color: #eee;
 }
